@@ -756,13 +756,13 @@ abstract class CI_DB_driver {
 	 * @param	string	the sql query
 	 * @return	mixed
 	 */
-	public function simple_query($sql)
+	public function simple_query($sql,$binds=FALSE)
 	{
 		if ( ! $this->conn_id)
 		{
 			$this->initialize();
 		}
-
+		if ( $binds ) $sql = $this->compile_binds($sql, $binds);
 		return $this->_execute($sql);
 	}
 
