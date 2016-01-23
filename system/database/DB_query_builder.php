@@ -1379,6 +1379,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$this->from($table);
 		}
 
+		if(!empty($this->qb_orderby)&&empty($this->qb_limit)&&empty($this->qb_offset))$this->qb_orderby=null;
 		$result = ($this->qb_distinct === TRUE OR ! empty($this->qb_orderby))
 			? $this->query($this->_count_string.$this->protect_identifiers('numrows')."\nFROM (\n".$this->_compile_select()."\n) CI_count_all_results")
 			: $this->query($this->_compile_select($this->_count_string.$this->protect_identifiers('numrows')));
